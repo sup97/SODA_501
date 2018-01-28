@@ -36,7 +36,7 @@ test <- terr_trend[1:114,]
 
 
 #increases: "Harvey_Weinstein", "Me_Too_(hashtag)", "James_Comey", "Bitcoin", "cryptocurrency"
-#                 "Las_Vegas"
+#                 "Las_Vegas", "Fidget_spinner"
 #decreases: "Obama"
 page_v <- article_pageviews(article = "Harvey_Weinstein", end = "2018100100")
 

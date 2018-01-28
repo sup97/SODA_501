@@ -13,17 +13,32 @@ library(plyr)
 ###
 ### Problem 1
 ###
+terr_trend <- read.csv("C:/Users/ckell/OneDrive/Penn State/2017-2018/01_Spring/SODA_501/SODA_501/Exercise_2/data/multiTimeline.csv")
 
+#subset data to match paper figure
+terr_trend <- terr_trend[102:126,]
 
+#convert month to date variable in R
+terr_trend$date <- as.Date(paste(terr_trend$Month,"-01",sep=""))
+colnames(terr_trend) <- c("month", "views", "date")
 
+#plot
+ggplot(data=terr_trend, aes(x=date, y = views))+geom_point()+
+  geom_smooth(data=terr_trend[1:12,], method="lm")+
+  geom_smooth(data=terr_trend[13:25,], method="lm")
 
+test <- terr_trend[1:114,]
+
+?geom_smooth
 ###
-### Problem 2
+### Problems 2 and 3
 ###
 
 
-#possible terms: "Harvey_Weinstein", "Me_Too_(hashtag)", "James_Comey"
-page_v <- article_pageviews(article = "Michael_Flynn", end = "2018100100")
+#increases: "Harvey_Weinstein", "Me_Too_(hashtag)", "James_Comey", "Bitcoin", "cryptocurrency"
+#                 "Las_Vegas"
+#decreases: "Obama"
+page_v <- article_pageviews(article = "Harvey_Weinstein", end = "2018100100")
 
 ggplot(data=page_v, aes(x=date, y = views))+geom_point()
 
@@ -39,3 +54,14 @@ agg_dat <- ddply(page_v, .(month), getsum)
 agg_dat$month <- as.POSIXct(agg_dat$month)
 
 ggplot(data=agg_dat, aes(x=month, y = views))+geom_point()
+
+#Regression discontinuity plots
+# Cutoffs rows: 
+#     Harvey Weinstein, 24
+#     Obama, 21
+cutoff <- 24
+
+#plot
+ggplot(data=agg_dat, aes(x=month, y = views))+geom_point()+
+  geom_smooth(data=agg_dat[1:cutoff,], method="lm")+
+  geom_smooth(data=agg_dat[(cutoff+1):nrow(agg_dat),], method="lm")

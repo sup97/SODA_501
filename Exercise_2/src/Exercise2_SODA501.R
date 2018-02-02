@@ -14,19 +14,22 @@ library(plyr)
 ### Problem 1
 ###
 terr_trend <- read.csv("C:/Users/ckell/OneDrive/Penn State/2017-2018/01_Spring/SODA_501/SODA_501/Exercise_2/data/multiTimeline.csv")
+tot_trend <- read.csv("C:/Users/ckell/OneDrive/Penn State/2017-2018/01_Spring/SODA_501/SODA_501/Exercise_2/data/tot_topics_us.csv")
+
+terr_trend <- cbind(terr_trend,rowSums(tot_trend[,2:50]))
 
 #subset data to match paper figure
 terr_trend <- terr_trend[102:126,]
 
 #convert month to date variable in R
 terr_trend$date <- as.Date(paste(terr_trend$Month,"-01",sep=""))
-colnames(terr_trend) <- c("month", "views", "date")
+colnames(terr_trend) <- c("month", "views","tot_count", "date")
 
 #plot
-ggplot(data=terr_trend, aes(x=date, y = views))+geom_point()+
-  geom_smooth(data=terr_trend[1:114,], method="lm")+ #for full dataset, 114
+ggplot(data=terr_trend, aes(x=date, y = tot_count))+geom_point()+
+  geom_smooth(data=terr_trend[1:114,], method="lm")+ #for full dataset, 114, 14 when just small
   geom_smooth(data=terr_trend[115:169,], method="lm")+ #for full dataset, 169
-  labs(title = "Searches of 'Terrorism' Over Time", subtitle = "Pre and post 06/2013")
+  labs(title = "Searches of 'Terrorism'-related words Over Time", subtitle = "Pre and post 06/2013")
 
 ###
 ### Problems 2 and 3

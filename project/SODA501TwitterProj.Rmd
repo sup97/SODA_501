@@ -1,0 +1,41 @@
+---
+title: "SODA501TwitterProj"
+author: "Xiaoran Sun"
+date: "2018/2/19"
+output: html_document
+---
+
+##This is to read in the text file and write into json file
+###Test on the sample data "xja.txt" first
+```{r}
+#setwd("~/Desktop/paper/SODA501") #set wherever your data directory is
+#install.packages("jsonlite")  #you need to install the jsonlite package to run these codes
+library(jsonlite)
+tweets_sample.df<-stream_in(file("xja.txt"))
+#head(tweets_sample.df)
+#str(tweets_sample.df)
+#names(tweets_sample.df)
+#str(tweets_sample.df$text)
+###you can de-comment the commands above to see what the json structure looks like###
+
+#also for geo-location, it is stored in:
+##tweets_sample.df$coordinates
+#to check the coordinate of user 1, we can just do:
+tweets_sample.df$coordinates[1,]
+#or to check the place where user 1 is 
+tweets_sample.df$place[1,] 
+#and there is the name or full name of the town!
+tweets_sample.df$place[1,] $name
+tweets_sample.df$place[1,] $full_name
+
+#Then we want to export the data as JSON file
+cat(toJSON(tweets_sample.df), file = 'sampletweet.json') #good
+```
+
+Therefore, to run the whole datafile on cloud/cluster, the codes that we would need:
+```{r}
+#suppose this Rmd (or R script?) is already in the same directory where the large datafile is
+library(jsonlite)
+tweets.df<-stream_in(file("tweets_2015_dec_usa.txt"))
+cat(toJSON(tweets.df), file = 'alltweet.json') 
+```

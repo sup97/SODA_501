@@ -2,7 +2,7 @@
 ### Claire Kelling
 ### SODA 501 Exercise 2
 ###
-### Created 1/28/18 for work on Exercise 2 about regression discontinuity
+### Created 1/28/18 for work on Exercise 2 about (basic) regression discontinuity ideas
 ### 
 
 library(pageviews)

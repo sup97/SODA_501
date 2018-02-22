@@ -39,5 +39,8 @@ Therefore, to run the whole datafile on cloud/cluster, the codes that we would n
 #setwd("/storage/home/cek32/work/soda_project")
 library(jsonlite)
 tweets.df<-stream_in(file("tweets_2015_dec_usa.txt"))
+#update on 2-22 when stream_in hit error
+#try this instead using this ndjson package:
+tweets.df<-ndjson::stream_in("tweets_2015_dec_usa.txt")
 cat(toJSON(tweets.df), file = 'alltweet.json') 
 ```

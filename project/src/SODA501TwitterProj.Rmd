@@ -1,6 +1,6 @@
 ---
 title: "SODA501TwitterProj"
-author: "Xiaoran Sun"
+author: "Claire Kelling and Xiaoran Sun"
 date: "2018/2/19"
 output: html_document
 ---
@@ -22,8 +22,8 @@ tweets_sample.df<-stream_in(file("xja.txt"))
 ##tweets_sample.df$coordinates
 #to check the coordinate of user 1, we can just do:
 tweets_sample.df$coordinates[1,]
-#or to check the place where user 1 is 
-tweets_sample.df$place[1,] 
+#or to check the place where user 1 is
+tweets_sample.df$place[1,]
 #and there is the name or full name of the town!
 tweets_sample.df$place[1,] $name
 tweets_sample.df$place[1,] $full_name
@@ -35,6 +35,8 @@ cat(toJSON(tweets_sample.df), file = 'sampletweet.json') #good
 Therefore, to run the whole datafile on cloud/cluster, the codes that we would need:
 ```{r}
 #suppose this Rmd (or R script?) is already in the same directory where the large datafile is
+# change working directory for cluster
+#setwd("/storage/home/cek32/work/soda_project")
 library(jsonlite)
 tweets.df<-stream_in(file("tweets_2015_dec_usa.txt"))
 cat(toJSON(tweets.df), file = 'alltweet.json') 

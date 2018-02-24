@@ -43,4 +43,9 @@ tweets.df<-stream_in(file("tweets_2015_dec_usa.txt"))
 #try this instead using this ndjson package:
 tweets.df<-ndjson::stream_in("tweets_2015_dec_usa.txt")
 cat(toJSON(tweets.df), file = 'alltweet.json') 
+
+#There are errors when reading the full file: 
+#      between 2822000 and 2822500
+#delete lines of json file using the following line in the terminal
+# sed '200000d' fileName.txt
 ```

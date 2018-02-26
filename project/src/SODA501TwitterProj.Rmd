@@ -4,7 +4,7 @@ author: "Claire Kelling and Xiaoran Sun"
 date: "2018/2/19"
 output: html_document
 ---
-###This is Shipi testing
+###This is Shipi testing So Young testing
 ##This is to read in the text file and write into json file
 ###Test on the sample data "xja.txt" first
 ```{r}
